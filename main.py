@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+import time
 
 
 class Block():
@@ -7,6 +7,4 @@ class Block():
     model.
     """
     def init(self, prev_hash, hash, data):
-        self.timestamp = datetime.now().replace(
-            tzinfo=timezone.utc
-        ).timestamp()
+        self.timestamp = time.time()
