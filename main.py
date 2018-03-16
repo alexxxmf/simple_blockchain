@@ -17,3 +17,12 @@ class Block():
         concatenation = str(self.prev_hash) + str(self.data) + str(self.timestamp)
         hash = hashlib.sha256(concatenation).hexdigest()
         return hash
+
+
+def create_genesis_block():
+    """
+    In every blockchain we need a Genesis Block, this is the function
+    that creates it.
+    """
+    genesis_block = Block("Genesis Block", 0)
+    return genesis_block
