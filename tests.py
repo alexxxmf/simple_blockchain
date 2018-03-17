@@ -47,5 +47,19 @@ class BlockChainTests(unittest.TestCase):
         self.blockchain.chain.append(dummy_block)
         self.assertFalse(self.blockchain.check_if_chain_is_valid())
 
+    def test_blockchain_get_address_balance(self):
+        tx = Transaction("Alex", "Alice", 50)
+        tx1 = Transaction("Alice", "Berto", 20)
+        self.blockchain.create_transaction(tx)
+        self.blockchain.create_transaction(tx1)
+        self.blockchain.mine_pending_transactions("Mr.Miner")
+        self.assertEqual(self.blockchain.get_address_balance("Alex"), -50)
+        self.assertEqual(self.blockchain.get_address_balance("Mr.Miner"), 0)
+        tx2 = Transaction("Alice", "Alex", 100)
+        self.blockchain.create_transaction(tx2)
+        self.blockchain.mine_pending_transactions("Mr.Miner")
+        self.assertEqual(self.blockchain.get_address_balance("Alex"), 50)
+        self.assertEqual(self.blockchain.get_address_balance("Mr.Miner"), 100)
+
 if __name__ == "__main__":
     unittest.main()

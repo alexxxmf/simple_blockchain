@@ -61,7 +61,8 @@ class Blockchain:
         In every blockchain we need a Genesis Block, this is the function
         that creates it.
         """
-        genesis_block = Block("Genesis Block", 0)
+        tx_zero = Transaction("", "", 0)
+        genesis_block = Block([tx_zero, ], 0)
         self.chain.append(genesis_block)
 
     def get_latest_block(self):
