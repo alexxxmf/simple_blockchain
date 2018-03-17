@@ -14,15 +14,26 @@ class Block():
         self.data = data
 
     def hash_block(self):
-        concatenation = str(self.prev_hash) + str(self.data) + str(self.timestamp)
-        hash = hashlib.sha256(concatenation).hexdigest()
-        return hash
+        concatenation = (
+            str(self.prev_hash) +
+            str(self.data) +
+            str(self.timestamp)
+        )
+        return hashlib.sha256(concatenation).hexdigest()
 
 
-def create_genesis_block():
+class Blockchain():
     """
-    In every blockchain we need a Genesis Block, this is the function
-    that creates it.
+    This is a simplified implementation of a blockchain. In this case,
+    it will just consist of an ordered secuence of blocks.
     """
-    genesis_block = Block("Genesis Block", 0)
-    return genesis_block
+    def init(self):
+        self.chain = [self.create_genesis_block()]
+
+    def create_genesis_block():
+        """
+        In every blockchain we need a Genesis Block, this is the function
+        that creates it.
+        """
+        genesis_block = Block("Genesis Block", 0)
+        return genesis_block
