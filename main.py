@@ -79,6 +79,16 @@ class Blockchain:
     def create_transaction(self, transaction):
         self.pending_transactions.append(transaction)
 
+    def get_address_balance(self, address):
+        balance = 0
+        for block in self.chain:
+            for individual_transaction in block.transaction:
+                if individual_transaction.from_address == address:
+                    balance -= individual_transaction.amount
+                if individual_transaction.to_address == address:
+                    balance += individual_transaction.amount
+        return balance
+
     def check_if_chain_is_valid(self):
         for block in self.chain:
             if self.chain.index(block) == 0:
