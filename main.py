@@ -2,16 +2,16 @@ import time
 import hashlib
 
 
-class Block():
+class Block:
     """
     This is a simplified implementation of a bitcoin block
     model.
     """
-    def init(self, data, prev_hash):
+    def __init__(self, data, prev_hash):
         self.timestamp = time.time()
+        self.data = data
         self.prev_hash = prev_hash
         self.hash = self.hash_block()
-        self.data = data
 
     def hash_block(self):
         concatenation = (
@@ -21,25 +21,26 @@ class Block():
         )
         return hashlib.sha256(concatenation).hexdigest()
 
-    def __str__(self):
+    def __repr__(self):
         return "<Block {0}>".format(self.hash)
 
 
-class Blockchain():
+class Blockchain:
     """
     This is a simplified implementation of a blockchain. In this case,
     it will just consist of an ordered secuence of blocks.
     """
-    def init(self):
-        self.chain = [self.create_genesis_block()]
+    def __init__(self):
+        self.chain = []
+        self._create_genesis_block()
 
-    def create_genesis_block():
+    def _create_genesis_block(self):
         """
         In every blockchain we need a Genesis Block, this is the function
         that creates it.
         """
         genesis_block = Block("Genesis Block", 0)
-        return genesis_block
+        self.chain.append(genesis_block)
 
     def get_latest_block(self):
         return self.chain[-1]
