@@ -6,20 +6,29 @@ class Block:
     """
     This is a simplified implementation of a bitcoin block
     model.
+    Here a explanation what is the nonce property:
+    https://en.bitcoin.it/wiki/Nonce
     """
     def __init__(self, data, prev_hash):
         self.timestamp = time.time()
         self.data = data
         self.prev_hash = prev_hash
         self.hash = self.hash_block()
+        self.nonce = 0
 
     def hash_block(self):
         concatenation = (
             str(self.prev_hash) +
             str(self.data) +
-            str(self.timestamp)
+            str(self.timestamp) +
+            str(self.nonce)
         )
         return hashlib.sha256(concatenation).hexdigest()
+
+    def mine_block(self, difficulty):
+        while self.hash[:difficulty + 1] != "0" * difficulty:
+            self.nonce += 1
+            self.hash = self.hash_block()
 
     def __repr__(self):
         return "<Block {0}>".format(self.hash)
