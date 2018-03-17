@@ -62,3 +62,5 @@ class Blockchain:
 
             if current_block.prev_hash != previous_block.hash:
                 return False
+
+            return True
