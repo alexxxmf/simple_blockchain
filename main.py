@@ -26,7 +26,7 @@ class Block:
         return hashlib.sha256(concatenation).hexdigest()
 
     def mine_block(self, difficulty):
-        while self.hash[:difficulty + 1] != "0" * difficulty:
+        while self.hash[:difficulty] != "0" * difficulty:
             self.nonce += 1
             self.hash = self.hash_block()
 

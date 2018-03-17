@@ -15,8 +15,9 @@ class BlockTests(unittest.TestCase):
 
     def test_block_mine_method(self):
         block = Block("random data", "0x1234")
+        difficulty = 1
         block.mine_block(1)
-        self.fail(block.nonce)
+        self.assertEqual(block.hash[:difficulty], "0")
 
 
 class BlockChainTests(unittest.TestCase):
