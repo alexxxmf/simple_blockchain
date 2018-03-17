@@ -2,6 +2,16 @@ import time
 import hashlib
 
 
+class Transaction:
+    """
+    This model represents in a simplified way a transaction
+    """
+    def __init__(self, from_address, to_address, amount):
+        self.from_address = from_address
+        self.to_address = to_address
+        self.amount = amount
+
+
 class Block:
     """
     This is a simplified implementation of a bitcoin block
