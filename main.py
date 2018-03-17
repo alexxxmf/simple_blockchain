@@ -19,9 +19,9 @@ class Block:
     Here a explanation what is the nonce property:
     https://en.bitcoin.it/wiki/Nonce
     """
-    def __init__(self, data, prev_hash):
+    def __init__(self, transaction, prev_hash):
         self.timestamp = time.time()
-        self.data = data
+        self.transaction = transaction
         self.prev_hash = prev_hash
         self.nonce = 0
         self.hash = self.hash_block()
@@ -29,7 +29,7 @@ class Block:
     def hash_block(self):
         concatenation = (
             str(self.prev_hash) +
-            str(self.data) +
+            str(self.transaction) +
             str(self.timestamp) +
             str(self.nonce)
         )
@@ -53,6 +53,8 @@ class Blockchain:
         self.chain = []
         self.difficulty = 1
         self._create_genesis_block()
+        self.pending_transactions = []
+        self.mining_reward = 100
 
     def _create_genesis_block(self):
         """
@@ -65,9 +67,10 @@ class Blockchain:
     def get_latest_block(self):
         return self.chain[-1]
 
-    def create_new_block(self, data):
+    def mine_pending_transactions(self):
         previous_block = self.get_latest_block()
-        block = Block(data, previous_block.hash)
+        block = Block(self.pending_transactions, previous_block)
+        block.mine_block(self.difficulty)
         self.chain.append(block)
 
     def check_if_chain_is_valid(self):
