@@ -37,5 +37,10 @@ class BlockChainTests(unittest.TestCase):
         block = self.blockchain.get_latest_block()
         self.assertEqual(block.data, "random stuff")
 
+    def test_blockchain_not_valid_when_block_is_modified(self):
+        dummy_block = Block("random stuff", "0x00123")
+        self.blockchain.chain.append(dummy_block)
+        self.fail(self.blockchain.check_if_chain_is_valid())
+
 if __name__ == "__main__":
     unittest.main()
