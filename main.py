@@ -47,7 +47,7 @@ class Blockchain:
 
     def create_new_block(self, data):
         previous_block = self.get_latest_block()
-        block = Block(previous_block.hash, data)
+        block = Block(data, previous_block.hash)
         self.chain.append(block)
 
     def check_if_chain_is_valid(self):

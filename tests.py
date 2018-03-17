@@ -18,9 +18,24 @@ class BlockChainTests(unittest.TestCase):
     """
     Tests for the Block object
     """
+    def setUp(self):
+        self.blockchain = Blockchain()
+
     def test_blockchain_created_with_genesis(self):
-        blockchain = Blockchain()
-        self.assertEqual(len(blockchain.chain), 1)
+        self.assertEqual(len(self.blockchain.chain), 1)
+
+    def test_blockchain_new_block(self):
+        self.blockchain.create_new_block("random stuff")
+        self.assertEqual(len(self.blockchain.chain), 2)
+        self.assertEqual(
+            self.blockchain.chain[-1].prev_hash,
+            self.blockchain.chain[-2].hash
+        )
+
+    def test_blockchain_get_latest_block(self):
+        self.blockchain.create_new_block("random stuff")
+        block = self.blockchain.get_latest_block()
+        self.assertEqual(block.data, "random stuff")
 
 if __name__ == "__main__":
     unittest.main()
