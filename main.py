@@ -21,6 +21,9 @@ class Block():
         )
         return hashlib.sha256(concatenation).hexdigest()
 
+    def __str__(self):
+        return "<Block {0}>".format(self.current_hash)
+
 
 class Blockchain():
     """
