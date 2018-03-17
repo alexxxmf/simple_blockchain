@@ -35,6 +35,7 @@ class BlockChainTests(unittest.TestCase):
         self.blockchain.pending_transactions.append(tx)
         self.blockchain.mine_pending_transactions()
         self.assertEqual(len(self.blockchain.chain), 2)
+        self.assertEqual(len(self.blockchain.pending_transactions), 0)
 
     def test_blockchain_not_valid_when_block_is_modified(self):
         dummy_block = Block("random stuff", "0x00123")
