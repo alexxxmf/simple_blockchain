@@ -10,7 +10,7 @@ class Block():
     def init(self, data, prev_hash):
         self.timestamp = time.time()
         self.prev_hash = prev_hash
-        self.current_hash = self.hash_block()
+        self.hash = self.hash_block()
         self.data = data
 
     def hash_block(self):
@@ -22,7 +22,7 @@ class Block():
         return hashlib.sha256(concatenation).hexdigest()
 
     def __str__(self):
-        return "<Block {0}>".format(self.current_hash)
+        return "<Block {0}>".format(self.hash)
 
 
 class Blockchain():
@@ -40,3 +40,24 @@ class Blockchain():
         """
         genesis_block = Block("Genesis Block", 0)
         return genesis_block
+
+    def get_latest_block(self):
+        return self.chain[-1]
+
+    def create_new_block(self, data):
+        previous_block = self.get_latest_block()
+        block = Block(previous_block.hash, data)
+        self.chain.append(block)
+
+    def check_if_chain_is_valid(self):
+        for block in self.chain:
+            if self.chain.index(block) == 0:
+                continue
+            current_block = block
+            previous_block = self.chain[(self.chain.index(block) - 1)]
+
+            if current_block.hash != current_block.hash_block():
+                return False
+
+            if current_block.prev_hash != previous_block.hash:
+                return False
