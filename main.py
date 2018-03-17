@@ -67,11 +67,14 @@ class Blockchain:
     def get_latest_block(self):
         return self.chain[-1]
 
-    def mine_pending_transactions(self):
+    def mine_pending_transactions(self, miner_address):
         previous_block = self.get_latest_block()
         block = Block(self.pending_transactions, previous_block)
         block.mine_block(self.difficulty)
         self.chain.append(block)
+
+        miner_reward = Transaction("", miner_address, self.mining_reward)
+        self.pending_transactions = [miner_reward]
 
     def check_if_chain_is_valid(self):
         for block in self.chain:
