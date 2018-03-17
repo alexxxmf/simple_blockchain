@@ -76,6 +76,9 @@ class Blockchain:
         miner_reward = Transaction("", miner_address, self.mining_reward)
         self.pending_transactions = [miner_reward]
 
+    def create_transaction(self, transaction):
+        self.pending_transactions.append(transaction)
+
     def check_if_chain_is_valid(self):
         for block in self.chain:
             if self.chain.index(block) == 0:

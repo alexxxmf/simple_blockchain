@@ -37,6 +37,11 @@ class BlockChainTests(unittest.TestCase):
         self.assertEqual(len(self.blockchain.chain), 2)
         self.assertEqual(len(self.blockchain.pending_transactions), 1)
 
+    def test_blockchain_create_transaction(self):
+        tx = Transaction("fromAlex", "toAlice", 50)
+        self.blockchain.create_transaction(tx)
+        self.assertEqual(len(self.blockchain.pending_transactions), 1)
+
     def test_blockchain_not_valid_when_block_is_modified(self):
         dummy_block = Block("random stuff", "0x00123")
         self.blockchain.chain.append(dummy_block)
