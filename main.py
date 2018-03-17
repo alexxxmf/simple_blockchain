@@ -13,8 +13,8 @@ class Block:
         self.timestamp = time.time()
         self.data = data
         self.prev_hash = prev_hash
-        self.hash = self.hash_block()
         self.nonce = 0
+        self.hash = self.hash_block()
 
     def hash_block(self):
         concatenation = (
@@ -41,6 +41,7 @@ class Blockchain:
     """
     def __init__(self):
         self.chain = []
+        self.difficulty = 1
         self._create_genesis_block()
 
     def _create_genesis_block(self):

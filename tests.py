@@ -13,6 +13,11 @@ class BlockTests(unittest.TestCase):
         self.assertEqual(block.data, "random data")
         self.assertIn("Block", str(block))
 
+    def test_block_mine_method(self):
+        block = Block("random data", "0x1234")
+        block.mine_block(1)
+        self.fail(block.nonce)
+
 
 class BlockChainTests(unittest.TestCase):
     """
