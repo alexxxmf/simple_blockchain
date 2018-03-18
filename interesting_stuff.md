@@ -14,3 +14,8 @@ Basically it's computanionally expensive because finding the hash that meets the
 
 The original bitcoin projects seems to be using levelDB (key-value store).
 For this case, we'll use [PickeDB](https://pythonhosted.org/pickleDB/) which is a lightweight key-value store based in python.
+
+
+#####Serialization for db
+
+I opted for using a key/value store DB and writing some serialization for the objects to properly structure the data once it gets into DB

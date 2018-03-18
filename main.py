@@ -48,6 +48,16 @@ class Block:
             self.nonce += 1
             self.hash = self.hash_block()
 
+    @property
+    def serialized(self):
+        return {
+            'timestamp': self.timestamp,
+            'transaction': self.transaction,
+            'prev_hash': self.prev_hash,
+            'nonce': self.nonce,
+            'hash': self.hash,
+        }
+
     def __repr__(self):
         return "<Block {0}>".format(self.hash)
 

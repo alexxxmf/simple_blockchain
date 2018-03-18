@@ -38,6 +38,13 @@ class BlockTests(unittest.TestCase):
         self.block.mine_block(1)
         self.assertEqual(self.block.hash[:difficulty], "0")
 
+    def test_block_serialized(self):
+        keys = ['transaction', 'nonce', 'timestamp', 'prev_hash', 'hash']
+        # we change the way to test here because hash always changes for every
+        # time we run the tests so we just check we have the same key structure
+        for k in self.block.serialized:
+            self.assertTrue(k in keys)
+
 
 class BlockChainTests(unittest.TestCase):
     """
