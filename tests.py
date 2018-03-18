@@ -55,11 +55,6 @@ class BlockChainTests(unittest.TestCase):
 
     def test_blockchain_created_with_genesis(self):
         self.assertEqual(len(self.blockchain.chain), 1)
-        genesis_block = self.blockchain.blocks_index_db.get("0")
-        self.assertEqual(
-            self.blockchain.blocks_db.get(genesis_block)['prev_hash'],
-            0
-        )
 
     def test_blockchain_mine_pending_tx(self):
         tx = Transaction("fromAlex", "toAlice", 50)

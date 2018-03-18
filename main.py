@@ -69,9 +69,6 @@ class Blockchain:
     it will just consist of an ordered secuence of blocks.
     """
     def __init__(self):
-        self.blocks_db = pickledb.load('blocks.db', False)
-        self.blocks_index_db = pickledb.load('blocks_index.db', False)
-        self.chainstate = pickledb.load('chainstate.db', False)
         self.chain = []
         self.difficulty = 1
         self._create_genesis_block()
@@ -86,8 +83,6 @@ class Blockchain:
         tx_zero = Transaction("", "", 0)
         genesis_block = Block([tx_zero, ], 0)
         self.chain.append(genesis_block)
-        self.blocks_index_db.set("0", genesis_block.hash)
-        self.blocks_db.set(genesis_block.hash, genesis_block.serialized)
 
     def get_latest_block(self):
         return self.chain[-1]

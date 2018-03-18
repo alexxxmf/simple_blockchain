@@ -20,7 +20,5 @@ We are going to use the following structure:
 * DB to store index as key and hash as value
 * DB to store hash as key and properties of that block as values
 
+[This is an interesiting discussion on why bitcin core did originally picked LevelDB](https://bitcoin.stackexchange.com/questions/48959/why-is-bitcoin-core-using-leveldb-instead-of-redis-or-sqlite)
 
-#####Serialization for db
-
-I opted for using a key/value store DB and writing some serialization for the objects to properly structure the data once it gets into DB
