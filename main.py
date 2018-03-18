@@ -122,3 +122,13 @@ class Blockchain:
                 return False
 
             return True
+
+    @property
+    def config_serialized(self):
+        # Here we ommit chain property because it will be what we are going
+        # to store in a separate db, this will go into a blockchain config db
+        return {
+            'difficulty': self.difficulty,
+            'pending_transactions': self.pending_transactions,
+            'mining_reward': self.mining_reward,
+        }

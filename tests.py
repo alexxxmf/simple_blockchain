@@ -87,5 +87,15 @@ class BlockChainTests(unittest.TestCase):
         self.assertEqual(self.blockchain.get_address_balance("Alex"), 50)
         self.assertEqual(self.blockchain.get_address_balance("Mr.Miner"), 100)
 
+    def test_blockchain_config_serialized(self):
+        self.assertEqual(
+            self.blockchain.config_serialized,
+            {
+                'mining_reward': 100,
+                'pending_transactions': [],
+                'difficulty': 1
+            }
+        )
+
 if __name__ == "__main__":
     unittest.main()
