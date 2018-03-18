@@ -28,10 +28,10 @@ class Block:
 
     def hash_block(self):
         concatenation = (
-            str(self.prev_hash) +
-            str(self.transaction) +
-            str(self.timestamp) +
-            str(self.nonce)
+            str(self.prev_hash).encode('utf-8') +
+            str(self.transaction).encode('utf-8') +
+            str(self.timestamp).encode('utf-8') +
+            str(self.nonce).encode('utf-8')
         )
         return hashlib.sha256(concatenation).hexdigest()
 
