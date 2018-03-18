@@ -3,21 +3,40 @@ import unittest
 from main import Block, Blockchain, Transaction
 
 
+class TansactionTests(unittest.TestCase):
+    """
+    Tests for the Transaction object
+    """
+    def setUp(self):
+        self.tx = Transaction("Alex", "Alice", 50)
+
+    def test_block_serialized(self):
+        self.assertEqual(
+            self.tx.serialized,
+            {
+                'from_address': 'Alex',
+                'to_address': 'Alice',
+                'amount': 50
+            }
+        )
+
+
 class BlockTests(unittest.TestCase):
     """
     Tests for the Block object
     """
+    def setUp(self):
+        self.block = Block("random tx", "0x1234")
+
     def test_block_properties_are_properly_created(self):
-        block = Block("random tx", "0x1234")
-        self.assertEqual(block.prev_hash, "0x1234")
-        self.assertEqual(block.transaction, "random tx")
-        self.assertIn("Block", str(block))
+        self.assertEqual(self.block.prev_hash, "0x1234")
+        self.assertEqual(self.block.transaction, "random tx")
+        self.assertIn("Block", str(self.block))
 
     def test_block_mine_method(self):
-        block = Block("random data", "0x1234")
         difficulty = 1
-        block.mine_block(1)
-        self.assertEqual(block.hash[:difficulty], "0")
+        self.block.mine_block(1)
+        self.assertEqual(self.block.hash[:difficulty], "0")
 
 
 class BlockChainTests(unittest.TestCase):

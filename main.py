@@ -11,6 +11,14 @@ class Transaction:
         self.to_address = to_address
         self.amount = amount
 
+    @property
+    def serialized(self):
+        return {
+            'from_address': self.from_address,
+            'to_address': self.to_address,
+            'amount': self.amount
+        }
+
 
 class Block:
     """
