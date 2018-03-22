@@ -23,3 +23,8 @@ We are going to use the following structure:
 [This is an interesiting discussion on why bitcin core did originally picked LevelDB](https://bitcoin.stackexchange.com/questions/48959/why-is-bitcoin-core-using-leveldb-instead-of-redis-or-sqlite)
 
 [And this is why I opted for chosing SQLite, nice excuse to try it](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011604.html)
+
+
+#####Basic idea behind PoW
+
+It should be difficult to calculate but really easy to verify that the nonce provided is the one that solves the computational problem

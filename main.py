@@ -1,6 +1,6 @@
-import time
 import hashlib
-import pickledb
+import sqlite3
+import time
 
 
 class Transaction:
@@ -74,6 +74,7 @@ class Blockchain:
         self._create_genesis_block()
         self.pending_transactions = []
         self.mining_reward = 100
+        self.db = "blocks.db"
 
     def _create_genesis_block(self):
         """
