@@ -25,7 +25,7 @@ class Block:
     """
     This is a simplified implementation of a bitcoin block
     model.
-    Here a explanation what is the nonce property:
+    Here a explanation what the nonce property is:
     https://en.bitcoin.it/wiki/Nonce
     """
     def __init__(self, transaction, prev_hash):
