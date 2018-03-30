@@ -1,12 +1,16 @@
 import hashlib
-import sqlite3
 import time
+from database import BaseModel
 
 
-class Transaction:
+class Transaction(BaseModel):
     """
     This model represents in a simplified way a transaction
     """
+    from_address = CharField(max_length=255)
+    to_address = CharField(max_length=255)
+    amount = IntegerField()
+
     def __init__(self, from_address, to_address, amount):
         self.from_address = from_address
         self.to_address = to_address
@@ -74,7 +78,6 @@ class Blockchain:
         self._create_genesis_block()
         self.pending_transactions = []
         self.mining_reward = 100
-        self.db = "blocks.db"
 
     def _create_genesis_block(self):
         """
